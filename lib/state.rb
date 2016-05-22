@@ -9,4 +9,12 @@ class State
     @coordinate = coordinate
     @direction = direction
   end
+
+  def turnRight
+    @direction = Compass::POINTS[(Compass::POINTS.index(@direction) + 1) % 4]
+  end
+
+  def turnLeft
+    @direction = Compass::POINTS[(Compass::POINTS.index(@direction) + 3) % 4]
+  end
 end

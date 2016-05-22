@@ -10,8 +10,8 @@ class RoverTest < MiniTest::Test
   def setup
     max_x = rand(100)
     max_y = rand(100)
-    x = rand(max_x > 1 ? max_x : 0)
-    y = rand(max_y > 1 ? max_y : 0)
+    x = max_x > 1 ? rand(max_x) : 0
+    y = max_y > 1 ? rand(max_y) : 0
     @plateau = Plateau.new(max_x, max_y)
     @state = State.new(Coordinate.new(x, y), Compass::POINTS[rand(3)])
   end

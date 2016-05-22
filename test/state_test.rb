@@ -43,7 +43,7 @@ class StateTest < MiniTest::Test
     @state2.turnRight
 
     # check results
-    assert_equal Compass::POINTS[direction_index + 1 % 4], @state1.direction
+    assert_equal Compass::POINTS[(direction_index + 1) % 4], @state1.direction
     assert_equal 'N', @state2.direction
   end
 
@@ -58,7 +58,7 @@ class StateTest < MiniTest::Test
     @state2.turnLeft
 
     # check results
-    assert_equal Compass::POINTS[direction_index + 3 % 4], @state1.direction
+    assert_equal Compass::POINTS[(direction_index + 3) % 4], @state1.direction
     assert_equal 'W', @state2.direction
   end
 end

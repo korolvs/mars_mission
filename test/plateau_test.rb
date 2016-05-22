@@ -37,8 +37,8 @@ class PlateauTest < MiniTest::Test
     # prepare
     max_x = rand(100)
     max_y = rand(100)
-    x = rand(max_x > 1 ? max_x : 0)
-    y = rand(max_y > 1 ? max_y : 0)
+    x = max_x > 1 ? rand(max_x) : 0
+    y = max_y > 1 ? rand(max_y) : 0
 
     plateau = Plateau.new(max_x, max_y)
 
