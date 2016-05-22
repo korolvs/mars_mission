@@ -4,4 +4,7 @@ module MarsMissionError
 
   class NotValidCoordinateError < Error
   end
+
+  class RoverOutOfPlateauError < Error
+  end
 end
