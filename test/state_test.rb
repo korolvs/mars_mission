@@ -35,30 +35,69 @@ class StateTest < MiniTest::Test
   def test_successful_turn_right
     #prepare
     direction_index = rand(3)
-    @state1 = State.new(@coordinate, Compass::POINTS[direction_index])
-    @state2 = State.new(@coordinate, 'W')
+    state1 = State.new(@coordinate, Compass::POINTS[direction_index])
+    state2 = State.new(@coordinate, 'W')
 
     #action
-    @state1.turnRight
-    @state2.turnRight
+    state1.turnRight
+    state2.turnRight
 
     # check results
-    assert_equal Compass::POINTS[(direction_index + 1) % 4], @state1.direction
-    assert_equal 'N', @state2.direction
+    assert_equal Compass::POINTS[(direction_index + 1) % 4], state1.direction
+    assert_equal 'N', state2.direction
   end
 
   def test_successful_turn_left
     #prepare
     direction_index = rand(3)
-    @state1 = State.new(@coordinate, Compass::POINTS[direction_index])
-    @state2 = State.new(@coordinate, 'N')
+    state1 = State.new(@coordinate, Compass::POINTS[direction_index])
+    state2 = State.new(@coordinate, 'N')
 
     #action
-    @state1.turnLeft
-    @state2.turnLeft
+    state1.turnLeft
+    state2.turnLeft
 
     # check results
-    assert_equal Compass::POINTS[(direction_index + 3) % 4], @state1.direction
-    assert_equal 'W', @state2.direction
+    assert_equal Compass::POINTS[(direction_index + 3) % 4], state1.direction
+    assert_equal 'W', state2.direction
+  end
+
+  def test_successful_move
+    #prepare
+    stateN = State.new(Coordinate.new(3, 3), 'N')
+    stateE = State.new(Coordinate.new(3, 3), 'E')
+    stateS = State.new(Coordinate.new(3, 3), 'S')
+    stateW = State.new(Coordinate.new(3, 3), 'W')
+
+    #action
+    stateN.move
+    stateE.move
+    stateS.move
+    stateW.move
+
+    #check results
+    assert_equals 3, stateN.coordinate.x
+    assert_equals 4, stateN.coordinate.y
+
+    assert_equals 4, stateE.coordinate.x
+    assert_equals 3, stateE.coordinate.y
+
+    assert_equals 3, stateS.coordinate.x
+    assert_equals 2, stateS.coordinate.y
+
+    assert_equals 2, stateW.coordinate.x
+    assert_equals 3, stateW.coordinate.y
+  end
+
+  def test_fail_move_to_wrong_coordinate
+    #prepare
+    stateS = State.new(Coordinate.new(5, 0), 'S')
+    stateW = State.new(Coordinate.new(0, 5), 'W')
+
+    # check results
+    assert_raises MarsMissionError::InvalidCoordinateError do
+      stateS.move
+      stateW.move
+    end
   end
 end
