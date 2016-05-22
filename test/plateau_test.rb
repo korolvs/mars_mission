@@ -31,4 +31,30 @@ class PlateauTest < MiniTest::Test
       Plateau.new(max_x, wrong_max_y)
     end
   end
+
+  def test_is_state_in_plateau_method
+    # prepare
+    max_x = rand(100)
+    max_y = rand(100)
+    x = rand(max_x)
+    y = rand(max_y)
+
+    plateau = Plateau.new(max_x, max_y)
+
+    # states in plateau
+    state = State.new(x, y, Compass::POINTS[rand(3)])
+    state0 = State.new(0, 0, Compass::POINTS[rand(3)])
+    state_max = State.new(max_x, max_y, Compass::POINTS[rand(3)])
+
+    # states not in plateau
+    state_x_err = State.new(max_x + 1, max_y, Compass::POINTS[rand(3)])
+    state_y_err = State.new(max_x, max_y + 1, Compass::POINTS[rand(3)])
+
+    # check results
+    assert plateau.isStateInPlateau(state)
+    assert plateau.isStateInPlateau(state0)
+    assert plateau.isStateInPlateau(state_max)
+    assert_not plateau.isStateInPlateau(state_x_err)
+    assert_not plateau.isStateInPlateau(state_y_err)
+  end
 end
