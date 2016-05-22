@@ -54,7 +54,7 @@ class PlateauTest < MiniTest::Test
     assert plateau.isStateInPlateau(state)
     assert plateau.isStateInPlateau(state0)
     assert plateau.isStateInPlateau(state_max)
-    assert_not plateau.isStateInPlateau(state_x_err)
-    assert_not plateau.isStateInPlateau(state_y_err)
+    assert !plateau.isStateInPlateau(state_x_err)
+    assert !plateau.isStateInPlateau(state_y_err)
   end
 end

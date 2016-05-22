@@ -10,4 +10,8 @@ class Plateau
     end
     @max_x, @max_y = max_x, max_y
   end
+
+  def isStateInPlateau(state)
+    state.x <= @max_x && state.y <= @max_y
+  end
 end
