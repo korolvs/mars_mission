@@ -1,7 +1,7 @@
 require_relative 'compass'
 require_relative 'errors'
 
-class Coordinate
+class State
   attr_reader :x, :y, :d
 
   def initialize(x, y, d)

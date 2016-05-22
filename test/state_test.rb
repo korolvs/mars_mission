@@ -1,21 +1,21 @@
 require "minitest/autorun"
 require_relative "../lib/errors"
 require_relative "../lib/compass"
-require_relative "../lib/coordinate"
+require_relative "../lib/state"
 
-class CoordinateTest < MiniTest::Test
-  def test_successful_creating_valid_coordinate
+class StateTest < MiniTest::Test
+  def test_successful_creating_valid_state
     # prepare
     x = y = rand(100)
     d = Compass::POINTS[rand(3)]
 
     # action
-    coordinate = Coordinate.new(x, y, d)
+    state = State.new(x, y, d)
 
     # check results
-    assert_equal x, coordinate.x
-    assert_equal y, coordinate.y
-    assert_equal d, coordinate.d
+    assert_equal x, state.x
+    assert_equal y, state.y
+    assert_equal d, state.d
   end
 
   def test_fail_with_invalid_params
@@ -27,15 +27,15 @@ class CoordinateTest < MiniTest::Test
 
     # check results
     assert_raises MarsMissionError::NotValidCoordinateError do
-      Coordinate.new(wrong_x, y, d)
+      State.new(wrong_x, y, d)
     end
 
     assert_raises MarsMissionError::NotValidCoordinateError do
-      Coordinate.new(x, wrong_y, d)
+      State.new(x, wrong_y, d)
     end
 
     assert_raises MarsMissionError::NotValidCoordinateError do
-      Coordinate.new(x, y, wrong_d)
+      State.new(x, y, wrong_d)
     end
   end
 end

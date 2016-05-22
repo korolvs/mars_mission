@@ -2,7 +2,7 @@ require "minitest/autorun"
 require_relative "../lib/errors"
 require_relative "../lib/compass"
 require_relative "../lib/plateau"
-require_relative "../lib/coordinate"
+require_relative "../lib/state"
 
 class PlateauTest < MiniTest::Test
   def test_successful_creating_valid_plateau

@@ -1,5 +1,5 @@
 require_relative 'errors'
-require_relative 'coordinate'
+require_relative 'state'
 
 class Plateau
   attr_reader :max_x, :max_y
