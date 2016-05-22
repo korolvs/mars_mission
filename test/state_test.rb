@@ -76,17 +76,17 @@ class StateTest < MiniTest::Test
     stateW.move
 
     #check results
-    assert_equals 3, stateN.coordinate.x
-    assert_equals 4, stateN.coordinate.y
+    assert_equal 3, stateN.coordinate.x
+    assert_equal 4, stateN.coordinate.y
 
-    assert_equals 4, stateE.coordinate.x
-    assert_equals 3, stateE.coordinate.y
+    assert_equal 4, stateE.coordinate.x
+    assert_equal 3, stateE.coordinate.y
 
-    assert_equals 3, stateS.coordinate.x
-    assert_equals 2, stateS.coordinate.y
+    assert_equal 3, stateS.coordinate.x
+    assert_equal 2, stateS.coordinate.y
 
-    assert_equals 2, stateW.coordinate.x
-    assert_equals 3, stateW.coordinate.y
+    assert_equal 2, stateW.coordinate.x
+    assert_equal 3, stateW.coordinate.y
   end
 
   def test_fail_move_to_wrong_coordinate
