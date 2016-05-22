@@ -10,4 +10,7 @@ module MarsMissionError
 
   class RoverOutOfPlateauError < Error
   end
+
+  class WrongCommandError < Error
+  end
 end

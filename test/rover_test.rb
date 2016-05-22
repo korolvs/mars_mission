@@ -34,4 +34,28 @@ class RoverTest < MiniTest::Test
       Rover.new(@plateau, wrong_state)
     end
   end
+
+  def test_fail_wrong_command
+    #prepare
+    rover = Rover.new(@plateau, @state)
+
+    #check results
+    assert_raises MarsMissionError::WrongCommandError do
+      rover.command('A')
+    end
+    assert_raises MarsMissionError::WrongCommandError do
+      rover.command('W')
+    end
+  end
+
+  def test_fail_command_to_leave_plateau
+    #prepare
+    state = State.new(Coordinate.new(@plateau.max_x, @plateau.max_y), 'N')
+    rover = Rover.new(@plateau, state)
+
+    #check results
+    assert_raises MarsMissionError::RoverOutOfPlateauError do
+      rover.command('M')
+    end
+  end
 end
