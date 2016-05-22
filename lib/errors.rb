@@ -2,7 +2,10 @@ module MarsMissionError
   class Error < StandardError
   end
 
-  class NotValidCoordinateError < Error
+  class InvalidCoordinateError < Error
+  end
+
+  class InvalidDirectionError < Error
   end
 
   class RoverOutOfPlateauError < Error

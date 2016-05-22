@@ -6,12 +6,12 @@ class Plateau
 
   def initialize(max_x, max_y)
     unless max_x.is_a?(Integer) && max_y.is_a?(Integer) && max_x >= 0 && max_y >= 0
-      raise MarsMissionError::NotValidCoordinateError
+      raise MarsMissionError::InvalidCoordinateError
     end
     @max_x, @max_y = max_x, max_y
   end
 
   def isStateInPlateau(state)
-    state.x <= @max_x && state.y <= @max_y
+    state.coordinate.x <= @max_x && state.coordinate.y <= @max_y
   end
 end

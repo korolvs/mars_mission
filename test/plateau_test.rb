@@ -2,6 +2,7 @@ require "minitest/autorun"
 require_relative "../lib/errors"
 require_relative "../lib/compass"
 require_relative "../lib/plateau"
+require_relative "../lib/coordinate"
 require_relative "../lib/state"
 
 class PlateauTest < MiniTest::Test
@@ -23,11 +24,11 @@ class PlateauTest < MiniTest::Test
     wrong_max_x = wrong_max_y = -1
 
     # check results
-    assert_raises MarsMissionError::NotValidCoordinateError do
+    assert_raises MarsMissionError::InvalidCoordinateError do
       Plateau.new(wrong_max_x, max_y)
     end
 
-    assert_raises MarsMissionError::NotValidCoordinateError do
+    assert_raises MarsMissionError::InvalidCoordinateError do
       Plateau.new(max_x, wrong_max_y)
     end
   end
@@ -42,13 +43,13 @@ class PlateauTest < MiniTest::Test
     plateau = Plateau.new(max_x, max_y)
 
     # states in plateau
-    state = State.new(x, y, Compass::POINTS[rand(3)])
-    state0 = State.new(0, 0, Compass::POINTS[rand(3)])
-    state_max = State.new(max_x, max_y, Compass::POINTS[rand(3)])
+    state = State.new(Coordinate.new(x, y), Compass::POINTS[rand(3)])
+    state0 = State.new(Coordinate.new(0, 0), Compass::POINTS[rand(3)])
+    state_max = State.new(Coordinate.new(max_x, max_y), Compass::POINTS[rand(3)])
 
     # states not in plateau
-    state_x_err = State.new(max_x + 1, max_y, Compass::POINTS[rand(3)])
-    state_y_err = State.new(max_x, max_y + 1, Compass::POINTS[rand(3)])
+    state_x_err = State.new(Coordinate.new(max_x + 1, max_y), Compass::POINTS[rand(3)])
+    state_y_err = State.new(Coordinate.new(max_x, max_y + 1), Compass::POINTS[rand(3)])
 
     # check results
     assert plateau.isStateInPlateau(state)
