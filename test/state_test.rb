@@ -26,8 +26,39 @@ class StateTest < MiniTest::Test
     # prepare
     wrong_direction = 'A'
 
+    # check results
     assert_raises MarsMissionError::InvalidDirectionError do
       State.new(@coordinate, wrong_direction)
     end
+  end
+
+  def test_successful_turn_right
+    #prepare
+    direction_index = rand(3)
+    @state1 = State.new(@coordinate, Compass::POINTS[direction_index])
+    @state2 = State.new(@coordinate, 'W')
+
+    #action
+    @state1.turnRight
+    @state2.turnRight
+
+    # check results
+    assert_equal Compass::POINTS[direction_index + 1 % 4], @state1.direction
+    assert_equal 'N', @state2.direction
+  end
+
+  def test_successful_turn_left
+    #prepare
+    direction_index = rand(3)
+    @state1 = State.new(@coordinate, Compass::POINTS[direction_index])
+    @state2 = State.new(@coordinate, 'N')
+
+    #action
+    @state1.turnLeft
+    @state2.turnLeft
+
+    # check results
+    assert_equal Compass::POINTS[direction_index + 3 % 4], @state1.direction
+    assert_equal 'W', @state2.direction
   end
 end
