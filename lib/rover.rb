@@ -10,4 +10,16 @@ class Rover
     raise MarsMissionError::RoverOutOfPlateauError unless plateau.isStateInPlateau(state)
     @plateau, @state = plateau, state
   end
+
+  def command(letter)
+    raise MarsMissionError::WrongCommandError unless %w(L R M).include? letter
+    case letter
+      when 'L'
+        @state.turnLeft
+      when 'R'
+        @state.turnRight
+      else
+        @state.move && (raise MarsMissionError::RoverOutOfPlateauError unless @plateau.isStateInPlateau(@state))
+    end
+  end
 end
